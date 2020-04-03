@@ -1,6 +1,6 @@
 'use strict';
 
-let money = prompt("ваш бюджет на месяц?");
+let money = +prompt("ваш бюджет на месяц?");
 let time = prompt("введите дату в формате YYYY-MM-DD");
 
 let appData = {
@@ -12,15 +12,46 @@ let appData = {
     saving: false
 };
 
+for (let i = 0; i < 2; i++) {
+    let key = prompt("Введите обязательную статью расходов в этом месяце");
+    let value = prompt("Во сколько обойдется?");
 
-let expensesKey = prompt("Введите обязательную статью расходов в этом месяце");
-console.log(expensesKey);
+    if (typeof(key) === "string" && typeof(key) != null && typeof(value) != null && key != "" && value != "") {
+        appData.expenses[key] = +value;
+    } else {
+        console.log("wrong data");
+        i--;
+    }
+}
 
-let expensesValue = prompt("Во сколько обойдется?");
-console.log(expensesValue);
+// let i = 0;
+// do {
+//     let key = prompt("Введите обязательную статью расходов в этом месяце");
+//     let value = prompt("Во сколько обойдется?");
 
-appData.expenses[expensesKey] = +expensesValue;
+//     if (typeof(key) === "string" && typeof(key) != null && typeof(value) != null && key != "" && value != "") {
+//         appData.expenses[key] = +value;
+//         i++;
+//     } else {
+//         console.log("wrong data");
+//     }
+// } while (i < 2);
 
-console.log(appData.expenses);
+// let i = 0;
+// while (i < 2) {
+//     let key = prompt("Введите обязательную статью расходов в этом месяце");
+//     let value = prompt("Во сколько обойдется?");
 
-alert("Бюджет на 1 день: " + appData.expenses[expensesKey]/30);
+//     if (typeof (key) === "string" && typeof (key) != null && typeof (value) != null && key != "" && value != "") {
+//         appData.expenses[key] = +value;
+//         i++;
+//     } else {
+//         console.log("wrong data");
+//     }
+// }
+
+appData.moneyPerDay = appData.budget / 30;
+
+console.log(appData);
+
+alert("Бюджет на 1 день: " + appData.moneyPerDay);
